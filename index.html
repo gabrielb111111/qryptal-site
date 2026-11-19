@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qryptal — Risco e Transição Criptográfica Pós-Quântica</title>
+  <style>
+    :root {
+      --bg: #062C22;
+      --surface: rgba(255, 255, 255, 0.035);
+      --border: rgba(148, 163, 184, 0.22);
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --accent: #FF6B35;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px 64px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .founder-tag {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .problem-block {
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 3.6vw, 2.35rem);
+      line-height: 1.2;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      max-width: 26ch;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    li {
+      color: var(--muted);
+      font-size: 0.96rem;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    li strong {
+      color: var(--text);
+      font-weight: 550;
+    }
+
+    .contact-box {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      max-width: 62ch;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 11px 18px;
+      border-radius: 7px;
+    }
+
+    .email-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+    }
+
+    footer {
+      margin-top: 44px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">Qryptal</div>
+      <div class="founder-tag">Gabriel Patrick Berbeki · Fundador &amp; Arquitetura Técnica</div>
+    </header>
+
+    <main>
+      <section class="problem-block">
+        <div class="eyebrow">O problema</div>
+        <h1>Dados criptografados hoje com algoritmos vulneráveis ao pós-quântico podem ser capturados agora para decifração futura (HNDL) e quebrar exigências regulatórias sem inventário prévio.</h1>
+      </section>
+
+      <section class="section">
+        <h2>O que existe e é entregue hoje</h2>
+        <ul>
+          <li>
+            <strong>Mapeamento de exposição e CBOM:</strong> identificação pragmática de onde chaves, certificados e fluxos sensíveis residem antes de propor qualquer troca de algoritmo.
+          </li>
+          <li>
+            <strong>Arquitetura híbrida e padrões:</strong> desenho técnico combinando criptografia clássica e pós-quântica (como X25519 + ML-KEM-768 e assinaturas alinhadas a NIST FIPS 203/204), com foco em aderência a ambientes regulados.
+          </li>
+          <li>
+            <strong>Protótipo e medição real:</strong> API de referência e testes de desempenho/latência já executados em laboratório para validar viabilidade prática antes de mexer em produção.
+          </li>
+        </ul>
+      </section>
+
+      <section class="contact-box">
+        <div class="eyebrow" style="margin-bottom: 0;">Conversa direta</div>
+        <p>
+          Se você lidera segurança, arquitetura ou conformidade e quer avaliar onde seu ambiente está exposto,
+          podemos fazer uma conversa técnica direta de 15 a 20 minutos — sem apresentação comercial longa.
+        </p>
+        <div class="actions">
+          <a class="btn" href="mailto:gabriel@qryptal.com.br?subject=Conversa%20t%C3%A9cnica%20%E2%80%94%20Qryptal%20(15-20%20min)">
+            Agendar por e-mail
+          </a>
+          <a class="email-link" href="mailto:gabriel@qryptal.com.br">gabriel@qryptal.com.br</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      qryptal.com.br · Foco técnico em risco criptográfico e transição pós-quântica.
+    </footer>
+  </div>
+</body>
+</html>
