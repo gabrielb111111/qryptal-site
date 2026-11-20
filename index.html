@@ -4,10 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Qryptal — Segurança &amp; Criptografia Pós-Quântica (NIST IR 8547)</title>
-  <meta name="description" content="Inventário criptográfico (CBOM), arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547." />
-  <link rel="preconnect" href="https://googleapis.com" />
-  <link rel="preconnect" href="https://gstatic.com" crossorigin />
-  <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <meta
+    name="description"
+    content="Inventário criptográfico (CBOM), arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
   <style>
     :root {
       --bg-primary: #090C0E;
@@ -65,6 +71,7 @@
       align-items: center;
       justify-content: space-between;
       height: 72px;
+      gap: 16px;
     }
 
     .brand {
@@ -91,6 +98,12 @@
       font-weight: 600;
       font-size: 1rem;
       color: var(--accent-cyan);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
@@ -432,3 +445,323 @@
     }
 
     .modal-card {
+      width: 100%;
+      max-width: 540px;
+      background-color: var(--bg-surface-elevated);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 28px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-cyan);
+    }
+
+    .modal-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .checklist li {
+      padding: 10px 12px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+    }
+
+    .checklist span {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      margin-right: 8px;
+    }
+
+    @media (max-width: 860px) {
+      .metrics-grid,
+      .scope-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="#topo" class="brand">
+        <span class="brand-mark">Q</span>
+        <span>Qryptal</span>
+      </a>
+      <div class="nav-actions">
+        <button type="button" class="btn btn-sm btn-cyan-outline" id="open-checklist">
+          Checklist Técnico
+        </button>
+        <a href="#conversa" class="btn btn-sm btn-gold">Conversa Técnica</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="topo">
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Transição Pós-Quântica · NIST IR 8547 (Out/2026) &amp; FIPS 203 / 204</span>
+        <h1>Inventário criptográfico e transição segura antes da mudança em produção.</h1>
+        <p class="hero-sub">
+          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em
+          laboratório para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração
+          futura (HNDL) sem quebrar sistemas ativos.
+        </p>
+        <p class="founder-line">
+          Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong> · Alinhado ao roteiro
+          oficial de transição pós-quântica <strong>NIST IR 8547</strong>.
+        </p>
+        <div class="hero-actions">
+          <a href="#conversa" class="btn btn-gold">Agendar Conversa Técnica (15–20 min)</a>
+          <a href="#escopo" class="btn btn-cyan-outline">Ver Escopo &amp; Entregas</a>
+        </div>
+        <div class="tech-tags">
+          <span class="tag">X25519 + ML-KEM-768</span>
+          <span class="tag">ML-DSA</span>
+          <span class="tag">CBOM</span>
+          <span class="tag">NIST IR 8547</span>
+          <span class="tag">Ambientes Regulados</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Pilares técnicos">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-title">NIST IR 8547 (Out/2026)</div>
+            <p class="metric-desc">
+              Referência de cronograma para depreciação e transição de esquemas clássicos vulneráveis (2030–2035).
+            </p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">CBOM &amp; Risco HNDL</div>
+            <p class="metric-desc">
+              Visibilidade de ativos criptográficos e priorização por retenção de longo prazo antes de alterar rotas.
+            </p>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">Híbrido Controlado</div>
+            <p class="metric-desc">
+              Validação de X25519 + ML-KEM-768 e ML-DSA em laboratório para medir payloads e latência com segurança.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="risco">
+      <div class="container">
+        <span class="section-index">01 // Risco &amp; Conformidade</span>
+        <h2 class="section-title">Trocar algoritmos sem inventário prévio expõe a operação.</h2>
+        <p class="section-lead">
+          Com a publicação final do NIST IR 8547 em outubro de 2026, dados e fluxos protegidos hoje por
+          criptografia assimétrica clássica podem ser capturados agora para decifração futura (HNDL — Harvest Now,
+          Decrypt Later), impactando informações com longo horizonte de sigilo e exigências crescentes de governança
+          e auditoria.
+        </p>
+        <p class="section-lead">
+          Ao mesmo tempo, alterar chaves, certificados e bibliotecas sem conhecer dependências em aplicações, APIs e
+          módulos de segurança gera indisponibilidade e falhas de conformidade. A transição segura começa pelo
+          diagnóstico.
+        </p>
+      </div>
+    </section>
+
+    <section class="block" id="escopo">
+      <div class="container">
+        <span class="section-index">02 // Escopo &amp; Entregas</span>
+        <h2 class="section-title">O que existe e é aplicado hoje</h2>
+        <p class="section-lead">
+          O trabalho foca em clareza técnica e validação incremental: mapear o que existe, definir modelos híbridos
+          com fronteiras claras e testar comportamento prático antes de qualquer rollout amplo.
+        </p>
+
+        <div class="scope-grid">
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">FRENTE 01</span>
+              <h3>Mapeamento de Exposição &amp; CBOM</h3>
+              <p>
+                Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão
+                distribuídos, priorizando ativos por criticidade e tempo de retenção do dado.
+              </p>
+            </div>
+            <div class="scope-focus">Base: Inventário CBOM &amp; Priorização de Risco</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">FRENTE 02</span>
+              <h3>Arquitetura Híbrida &amp; Padrões</h3>
+              <p>
+                Desenho de encapsulamento/troca de chaves híbrida (X25519 + ML-KEM-768) e assinaturas digitais
+                pós-quânticas (ML-DSA) alinhadas ao NIST IR 8547 e FIPS 203/204, preservando compatibilidade durante
+                a transição.
+              </p>
+            </div>
+            <div class="scope-focus">Foco: Coexistência Clássica + PQC</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">FRENTE 03</span>
+              <h3>Protótipo &amp; Validação em Laboratório</h3>
+              <p>
+                API de referência e testes de desempenho e latência executados em ambiente controlado para avaliar
+                impacto real de tamanho de payloads e processamento antes de tocar produção.
+              </p>
+            </div>
+            <div class="scope-focus">Foco: Medição Real em Laboratório</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="conversa">
+      <div class="container">
+        <div class="cta-box">
+          <span class="section-index">03 // Conversa Direta</span>
+          <h2>Avaliação técnica de 15 a 20 minutos</h2>
+          <p>
+            Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição
+            do seu ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
+          </p>
+
+          <div class="cta-actions">
+            <a
+              href="mailto:gabrielberbeki@qryptal.com.br?subject=Avalia%C3%A7%C3%A3o%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
+              class="btn btn-gold"
+            >
+              Agendar por e-mail
+            </a>
+
+            <div class="email-pill">
+              <span>gabrielberbeki@qryptal.com.br</span>
+              <button type="button" class="copy-btn" id="copy-email-btn">Copiar</button>
+            </div>
+          </div>
+
+          <p class="cta-note">
+            Para aproveitar melhor os 20 minutos: informe na mensagem o tipo de ambiente (API, mensageria, PKI ou
+            dados em repouso), o horizonte de retenção das informações sensíveis e o foco principal da avaliação.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Qryptal · Segurança Criptográfica &amp; Transição Pós-Quântica</span>
+      <a href="mailto:gabrielberbeki@qryptal.com.br">gabrielberbeki@qryptal.com.br</a>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="checklist-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Pontos Para Levar à Conversa Técnica</h3>
+        <button type="button" class="modal-close" id="close-checklist">Fechar</button>
+      </div>
+      <p>
+        Não é preciso preparar apresentação. Três respostas objetivas já tornam a conversa de 15–20 minutos
+        bastante produtiva:
+      </p>
+      <ul class="checklist">
+        <li><span>01</span> Tipo de ambiente: APIs, TLS/PKI, mensageria ou dados em repouso.</li>
+        <li><span>02</span> Retenção / HNDL: por quanto tempo os dados precisam permanecer confidenciais.</li>
+        <li><span>03</span> Estágio atual: há inventário criptográfico (CBOM) ou testes híbridos em andamento?</li>
+      </ul>
+      <a
+        href="mailto:gabrielberbeki@qryptal.com.br?subject=Avalia%C3%A7%C3%A3o%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
+        class="btn btn-gold btn-sm"
+      >
+        Enviar Contexto por E-mail
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById("copy-email-btn");
+    const openModalBtn = document.getElementById("open-checklist");
+    const closeModalBtn = document.getElementById("close-checklist");
+    const modal = document.getElementById("checklist-modal");
+
+    if (copyBtn) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText("gabrielberbeki@qryptal.com.br");
+          copyBtn.textContent = "Copiado";
+          setTimeout(() => {
+            copyBtn.textContent = "Copiar";
+          }, 2000);
+        } catch {
+          copyBtn.textContent = "gabrielberbeki@qryptal.com.br";
+        }
+      });
+    }
+
+    if (openModalBtn && modal) {
+      openModalBtn.addEventListener("click", () => {
+        modal.classList.add("active");
+      });
+    }
+
+    if (closeModalBtn && modal) {
+      closeModalBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+    }
+
+    if (modal) {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.classList.remove("active");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
