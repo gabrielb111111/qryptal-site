@@ -3,178 +3,432 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qryptal — Segurança &amp; Criptografia PQC (NIST IR 8547)</title>
-  <meta
-    name="description"
-    content="Inventário criptográfico (CBOM), desenho de arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547 para redução de risco HNDL."
-  />
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23090b0e'/%3E%3Ccircle cx='14.5' cy='14.5' r='7.5' fill='none' stroke='%2322d3ee' stroke-width='2.3'/%3E%3Cline x1='18' y1='18' x2='24.5' y2='24.5' stroke='%23f3f4f6' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"
-  />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="topbar">
-    <div class="container nav">
-      <a href="#topo" class="brand" aria-label="Qryptal — Início">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <rect x="1.5" y="1.5" width="29" height="29" rx="6" fill="#11141a" stroke="#1e2430" />
-          <circle cx="14.5" cy="14.5" r="7.5" stroke="#22d3ee" stroke-width="2.2" />
-          <line x1="18" y1="18" x2="24.5" y2="24.5" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round" />
-        </svg>
-        <span class="brand-title">Qryptal</span>
-        <span class="brand-sub">Segurança &amp; Criptografia PQC</span>
-      </a>
-      <a href="#conversa" class="btn btn-ghost">Conversa Técnica</a>
-    </div>
-  </header>
-
-  <main id="topo">
-    <section class="hero">
-      <div class="container">
-        <p class="eyebrow mono">TRANSIÇÃO PÓS-QUÂNTICA · NIST IR 8547 &amp; FIPS 203 / 204 / 205</p>
-        <h1>Inventário criptográfico e transição segura antes da mudança em produção.</h1>
-        <p class="lead">
-          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em
-          laboratório para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração
-          futura (HNDL) sem quebrar sistemas ativos — alinhados ao cronograma do NIST IR 8547 (outubro de 2026).
-        </p>
-        <div class="tags">
-          <span>Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong></span>
-          <span class="tag mono">X25519 + ML-KEM-768</span>
-          <span class="tag mono">ML-DSA</span>
-          <span class="tag mono">CBOM</span>
-          <span class="tag mono">NIST IR 8547</span>
-          <span class="tag">Ambientes Regulados</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="container">
-        <p class="section-code mono">01 // RISCO &amp; CRONOGRAMA (NIST IR 8547)</p>
-        <h2>Alterar criptografia sem inventário prévio expõe a operação; adiar o diagnóstico aumenta o risco de atraso.</h2>
-        <div class="two-col">
-          <p>
-            Com a versão final do NIST IR 8547 publicada em outubro de 2026, o horizonte de depreciação e
-            descontinuação de criptografia assimétrica clássica vulnerável (como RSA e ECC) ganha marcos claros
-            entre 2030 e 2035. Dados e fluxos protegidos hoje podem ser capturados agora para decifração futura
-            (HNDL — Harvest Now, Decrypt Later), exigindo atenção antecipada para informações com longo horizonte
-            de sigilo.
-          </p>
-          <p>
-            Ao mesmo tempo, alterar chaves, certificados e bibliotecas sem conhecer dependências em aplicações, APIs,
-            PKI e HSMs gera indisponibilidade e falhas de conformidade. A transição segura começa pelo diagnóstico
-            controlado.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="block block-alt">
-      <div class="container">
-        <p class="section-code mono">02 // ESCOPO &amp; ENTREGAS</p>
-        <h2>O que existe e é aplicado hoje</h2>
-        <p class="lead">
-          Clareza técnica e validação incremental: mapear o que existe, definir modelos híbridos com fronteiras
-          claras e testar comportamento prático antes de qualquer mudança ampla.
-        </p>
-
-        <div class="grid-3">
-          <article class="card">
-            <div>
-              <p class="card-kicker mono">FRENTE 01</p>
-              <h3>Mapeamento de Exposição &amp; CBOM</h3>
-              <p>
-                Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão
-                distribuídos, priorizando ativos por criticidade e tempo de retenção do dado.
-              </p>
-            </div>
-            <p class="card-meta mono">Base: Inventário CBOM &amp; Priorização de Risco</p>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-kicker mono">FRENTE 02</p>
-              <h3>Arquitetura Híbrida &amp; Padrões</h3>
-              <p>
-                Desenho de encapsulamento/troca de chaves híbrida (X25519 + ML-KEM-768) e assinaturas digitais
-                pós-quânticas (ML-DSA) alinhadas ao NIST IR 8547 e FIPS 203/204, preservando compatibilidade na
-                transição.
-              </p>
-            </div>
-            <p class="card-meta mono">Foco: Coexistência Clássica + PQC</p>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-kicker mono">FRENTE 03</p>
-              <h3>Protótipo &amp; Validação em Laboratório</h3>
-              <p>
-                API de referência e testes de desempenho e latência executados em ambiente controlado para medir
-                tamanho de payloads, comportamento de handshake e processamento antes de tocar produção.
-              </p>
-            </div>
-            <p class="card-meta mono">Foco: Medição Real em Laboratório</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="conversa" class="block">
-      <div class="container">
-        <p class="section-code mono">03 // CONVERSA DIRETA</p>
-        <h2>Avaliação técnica de 15 a 20 minutos</h2>
-        <p class="lead">
-          Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição do
-          seu ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
-        </p>
-
-        <div class="cta-actions">
-          <a
-            href="mailto:gabrielberbeki@qryptal.com.br?subject=Avalia%C3%A7%C3%A3o%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
-            class="btn btn-primary"
-          >
-            Agendar por e-mail
-          </a>
-          <button type="button" id="copy-email" class="btn btn-ghost">
-            Copiar gabrielberbeki@qryptal.com.br
-          </button>
-          <span id="copy-status" class="feedback mono" aria-live="polite"></span>
-        </div>
-
-        <p class="helper">
-          Para aproveitar melhor os 20 minutos: informe na mensagem o tipo de ambiente (API, mensageria, PKI ou dados
-          em repouso), o horizonte de retenção das informações sensíveis e o foco principal da avaliação.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <span>© 2026 Qryptal · Segurança Criptográfica &amp; Transição Pós-Quântica</span>
-      <a href="mailto:gabrielberbeki@qryptal.com.br">gabrielberbeki@qryptal.com.br</a>
-    </div>
-  </footer>
-
-  <script>
-    const copyBtn = document.getElementById("copy-email");
-    const statusEl = document.getElementById("copy-status");
-    const email = "gabrielberbeki@qryptal.com.br";
-
-    if (copyBtn) {
-      copyBtn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(email);
-          statusEl.textContent = "E-mail copiado.";
-        } catch {
-          statusEl.textContent = email;
-        }
-      });
+  <title>Qryptal — Segurança &amp; Criptografia Pós-Quântica (NIST IR 8547)</title>
+  <meta name="description" content="Inventário criptográfico (CBOM), arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547." />
+  <link rel="preconnect" href="https://googleapis.com" />
+  <link rel="preconnect" href="https://gstatic.com" crossorigin />
+  <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #090C0E;
+      --bg-surface: #11161A;
+      --bg-surface-elevated: #161D22;
+      --border-subtle: #1F2933;
+      --border-gold: rgba(197, 160, 89, 0.45);
+      --accent-cyan: #38BDF8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.12);
+      --accent-gold: #C5A059;
+      --accent-gold-hover: #D4B26A;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-  </script>
-</body>
-</html>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(9, 12, 14, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid var(--accent-cyan);
+      background-color: var(--accent-cyan-dim);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--accent-cyan);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-size: 0.925rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-sm {
+      padding: 9px 16px;
+      font-size: 0.85rem;
+    }
+
+    .btn-gold {
+      background-color: var(--accent-gold);
+      color: #090C0E;
+      border-color: var(--accent-gold);
+    }
+
+    .btn-gold:hover {
+      background-color: var(--accent-gold-hover);
+      border-color: var(--accent-gold-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-cyan-outline {
+      background-color: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-cyan-outline:hover {
+      border-color: var(--accent-cyan);
+      background-color: var(--accent-cyan-dim);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      max-width: 820px;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 740px;
+      margin-bottom: 28px;
+    }
+
+    .founder-line {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      padding-left: 14px;
+      border-left: 2px solid var(--accent-gold);
+    }
+
+    .founder-line strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    /* Proof Metrics Bar */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .metric-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 20px 22px;
+    }
+
+    .metric-title {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+    }
+
+    .metric-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    /* Content Sections */
+    section.block {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-index {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 760px;
+      margin-bottom: 20px;
+    }
+
+    /* Scope Cards */
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .scope-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease;
+    }
+
+    .scope-card:hover {
+      border-color: var(--border-gold);
+    }
+
+    .scope-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .scope-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+    }
+
+    .scope-card p {
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
+
+    .scope-focus {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Conversion Box */
+    .cta-section {
+      padding: 80px 0;
+    }
+
+    .cta-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 44px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 28px;
+      font-size: 1rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .email-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--accent-cyan);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent-cyan);
+      background-color: var(--accent-cyan-dim);
+    }
+
+    .cta-note {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 32px 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Modal Checklist */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.78);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-card {
