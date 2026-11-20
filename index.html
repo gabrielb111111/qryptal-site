@@ -3,633 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qryptal — Segurança Criptográfica &amp; Transição Pós-Quântica</title>
-  <meta name="description" content="Inventário criptográfico (CBOM), arquitetura híbrida X25519 + ML-KEM-768 e ML-DSA, e validação em laboratório para ambientes regulados." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23062C22'/%3E%3Cpath d='M32 10L50 20.5V43.5L32 54L14 43.5V20.5L32 10Z' fill='none' stroke='%23FF6B35' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='6.5' fill='%23FF6B35'/%3E%3Cpath d='M37.5 37.5L48 48' stroke='%23F8FAFC' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-base: #041E17;
-      --bg-surface: #062C22;
-      --bg-card: rgba(9, 49, 38, 0.62);
-      --border-subtle: rgba(148, 163, 184, 0.16);
-      --border-strong: rgba(148, 163, 184, 0.28);
-      --border-accent: rgba(255, 107, 53, 0.45);
-      --text-primary: #F8FAFC;
-      --text-secondary: #94A3B8;
-      --text-muted: #64748B;
-      --accent: #FF6B35;
-      --accent-hover: #FF8152;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-base);
-      background-image:
-        radial-gradient(circle at 82% 4%, rgba(16, 185, 129, 0.09) 0%, transparent 45%),
-        radial-gradient(circle at 12% 24%, rgba(6, 44, 34, 0.92) 0%, transparent 60%);
-      color: var(--text-primary);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Cabeçalho */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(4, 30, 23, 0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .nav-inner {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-    }
-
-    .brand-identity {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-name {
-      font-size: 1.22rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-    }
-
-    .brand-tagline {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      margin-top: 3px;
-    }
-
-    .nav-action {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-primary);
-      text-decoration: none;
-      padding: 9px 15px;
-      border-radius: 6px;
-      border: 1px solid var(--border-strong);
-      transition: border-color 0.2s ease, color 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .nav-action:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 80px 0 64px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      background: rgba(255, 107, 53, 0.08);
-      border: 1px solid rgba(255, 107, 53, 0.28);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    h1 {
-      font-size: clamp(2.05rem, 4.4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-      max-width: 820px;
-      margin-bottom: 20px;
-    }
-
-    .hero-copy {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 730px;
-      margin-bottom: 34px;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .leadership-note {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-
-    .leadership-note strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    .standard-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-
-    /* Seções */
-    section {
-      padding: 64px 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 1.62rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      margin-bottom: 14px;
-    }
-
-    .section-intro {
-      color: var(--text-secondary);
-      max-width: 740px;
-      margin-bottom: 34px;
-    }
-
-    /* Risco & Contexto */
-    .risk-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--accent);
-      border-radius: 10px;
-      padding: 28px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .risk-box p {
-      color: var(--text-secondary);
-    }
-
-    .risk-box strong {
-      color: var(--text-primary);
-    }
-
-    /* Pilares */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
-      gap: 20px;
-    }
-
-    .pillar-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 26px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .pillar-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
-
-    .pillar-code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .pillar-card h3 {
-      font-size: 1.12rem;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      margin-bottom: 12px;
-    }
-
-    .pillar-card p {
-      font-size: 0.93rem;
-      color: var(--text-secondary);
-    }
-
-    .pillar-foot {
-      margin-top: 20px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-subtle);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      color: var(--text-primary);
-    }
-
-    /* Escopo Técnico */
-    .scope-list {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .scope-item {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .scope-item-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-
-    .scope-item-copy {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-    }
-
-    /* Contato */
-    .contact-section {
-      border-bottom: none;
-      padding-bottom: 84px;
-    }
-
-    .contact-panel {
-      background: linear-gradient(150deg, var(--bg-surface) 0%, rgba(4, 30, 23, 0.96) 100%);
-      border: 1px solid var(--border-accent);
-      border-radius: 12px;
-      padding: 38px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent);
-      color: #041E17;
-      font-weight: 600;
-      font-size: 0.94rem;
-      text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(4, 30, 23, 0.85);
-      color: var(--text-primary);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.84rem;
-      padding: 12px 18px;
-      border-radius: 6px;
-      border: 1px solid var(--border-strong);
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .brief-hint {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      padding-top: 16px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .brief-hint strong {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    /* Rodapé */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 30px 0;
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding: 56px 0 44px;
-      }
-      .contact-panel {
-        padding: 26px 20px;
-      }
-    }
-  </style>
+  <title>Qryptal — Segurança &amp; Criptografia PQC (NIST IR 8547)</title>
+  <meta
+    name="description"
+    content="Inventário criptográfico (CBOM), desenho de arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547 para redução de risco HNDL."
+  />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <header>
-    <div class="container nav-inner">
-      <a href="#" class="brand" aria-label="Qryptal — Segurança Criptográfica e Transição Pós-Quântica">
-        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="64" height="64" rx="14" fill="#062C22" stroke="#1E4D3E" stroke-width="1.5"/>
-          <path d="M32 10L50 20.5V43.5L32 54L14 43.5V20.5L32 10Z" stroke="#FF6B35" stroke-width="2.8" stroke-linejoin="round"/>
-          <path d="M32 18.5L42.5 24.6V39.4L32 45.5L21.5 39.4V24.6L32 18.5Z" stroke="#94A3B8" stroke-width="1.2" stroke-opacity="0.5"/>
-          <circle cx="32" cy="32" r="6.5" fill="#FF6B35"/>
-          <path d="M37.5 37.5L48 48" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <div class="brand-identity">
-          <span class="brand-name">Qryptal</span>
-          <span class="brand-tagline">Segurança &amp; Criptografia PQC</span>
-        </div>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#topo" class="brand">
+        <span class="brand-name">Qryptal</span>
+        <span class="brand-sep">/</span>
+        <span class="brand-tag">Segurança &amp; Criptografia PQC</span>
       </a>
-      <a href="#contato" class="nav-action">Conversa Técnica</a>
+      <a href="#conversa" class="btn btn-secondary">Conversa Técnica</a>
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
+  <main id="topo">
     <section class="hero">
       <div class="container">
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          <span>TRANSIÇÃO PÓS-QUÂNTICA · NIST FIPS 203 / 204</span>
-        </div>
+        <p class="eyebrow">TRANSIÇÃO PÓS-QUÂNTICA · NIST IR 8547 &amp; FIPS 203/204/205</p>
         <h1>Inventário criptográfico e transição segura antes da mudança em produção.</h1>
-        <p class="hero-copy">
-          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em laboratório para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração futura (HNDL) sem quebrar sistemas ativos.
+        <p class="lead">
+          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em laboratório
+          para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração futura (HNDL)
+          sem quebrar sistemas ativos — alinhados ao cronograma do NIST IR 8547 (outubro de 2026).
         </p>
-
-        <div class="hero-meta">
-          <div class="leadership-note">
-            Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong>
-          </div>
-          <div class="standard-badges">
-            <span class="badge">X25519 + ML-KEM-768</span>
-            <span class="badge">ML-DSA</span>
-            <span class="badge">CBOM</span>
-            <span class="badge">Ambientes Regulados</span>
-          </div>
-        </div>
+        <p class="meta-line">
+          Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong> ·
+          <span>X25519 + ML-KEM-768</span> · <span>ML-DSA</span> · <span>CBOM</span> ·
+          <span>NIST IR 8547</span> · <span>Ambientes Regulados</span>
+        </p>
       </div>
     </section>
 
-    <!-- O Problema -->
-    <section id="risco">
+    <section id="risco" class="section">
       <div class="container">
-        <div class="section-label">01 // Risco &amp; Conformidade</div>
-        <h2>Trocar algoritmos sem inventário prévio expõe a operação.</h2>
-        <div class="risk-box">
+        <p class="section-code">01 // RISCO &amp; CRONOGRAMA (NIST IR 8547)</p>
+        <h2>Alterar criptografia sem inventário prévio expõe a operação; adiar o diagnóstico aumenta o risco de atraso.</h2>
+        <div class="prose-grid">
           <p>
-            Dados e fluxos protegidos hoje por criptografia assimétrica clássica podem ser capturados agora para decifração futura (<strong>HNDL — Harvest Now, Decrypt Later</strong>), impactando informações com longo horizonte de sigilo e exigências crescentes de governança e auditoria.
+            Com a publicação final do NIST IR 8547 em outubro de 2026, o horizonte de depreciação e descontinuação
+            de algoritmos clássicos vulneráveis (como RSA e ECC) ganha marcos claros entre 2030 e 2035. Dados e fluxos
+            protegidos hoje por criptografia assimétrica clássica podem ser capturados agora para decifração futura
+            (HNDL — Harvest Now, Decrypt Later), exigindo atenção antecipada para informações com longo horizonte de sigilo.
           </p>
           <p>
-            Ao mesmo tempo, alterar chaves, certificados e bibliotecas sem conhecer dependências em aplicações, APIs e módulos de segurança gera indisponibilidade e falhas de conformidade. A transição segura começa pelo diagnóstico.
+            Por outro lado, trocar chaves, certificados, bibliotecas ou módulos de segurança no escuro — sem mapear
+            dependências em aplicações, APIs, PKI e HSMs — provoca indisponibilidade e falhas de conformidade.
+            A transição segura começa pelo diagnóstico controlado.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Entregas e Escopo Atual -->
-    <section id="escopo">
+    <section id="escopo" class="section section-alt">
       <div class="container">
-        <div class="section-label">02 // Escopo &amp; Entregas</div>
+        <p class="section-code">02 // ESCOPO &amp; ENTREGAS</p>
         <h2>O que existe e é aplicado hoje</h2>
-        <p class="section-intro">
-          O trabalho foca em clareza técnica e validação incremental: mapear o que existe, definir modelos híbridos com fronteiras claras e testar comportamento prático antes de qualquer rollout amplo.
+        <p class="section-subtitle">
+          Clareza técnica e validação incremental: mapear o que existe, definir modelos híbridos com fronteiras
+          claras e testar comportamento prático antes de qualquer mudança ampla.
         </p>
 
-        <div class="pillars-grid">
-          <article class="pillar-card">
-            <div>
-              <div class="pillar-code">FRENTE 01</div>
-              <h3>Mapeamento de Exposição &amp; CBOM</h3>
-              <p>
-                Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão distribuídos, priorizando ativos por criticidade e tempo de retenção do dado.
-              </p>
-            </div>
-            <div class="pillar-foot">Base: Inventário CBOM &amp; Priorização de Risco</div>
+        <div class="cards">
+          <article class="card">
+            <span class="card-step">FRENTE 01</span>
+            <h3>Mapeamento de Exposição &amp; CBOM</h3>
+            <p>
+              Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão distribuídos,
+              priorizando ativos por criticidade e tempo de retenção do dado.
+            </p>
+            <p class="card-foot">Base: Inventário CBOM &amp; Priorização</p>
           </article>
 
-          <article class="pillar-card">
-            <div>
-              <div class="pillar-code">FRENTE 02</div>
-              <h3>Arquitetura Híbrida &amp; Padrões</h3>
-              <p>
-                Desenho de encapsulamento/troca de chaves híbrida (<strong>X25519 + ML-KEM-768</strong>) e assinaturas digitais pós-quânticas (<strong>ML-DSA</strong>) alinhadas ao <strong>NIST FIPS 203/204</strong>, preservando compatibilidade durante a transição.
-              </p>
-            </div>
-            <div class="pillar-foot">Foco: Coexistência Clássica + PQC</div>
+          <article class="card">
+            <span class="card-step">FRENTE 02</span>
+            <h3>Arquitetura Híbrida &amp; Padrões</h3>
+            <p>
+              Desenho de encapsulamento/troca de chaves híbrida (X25519 + ML-KEM-768) e assinaturas digitais
+              pós-quânticas (ML-DSA) alinhadas ao NIST IR 8547 e FIPS 203/204, preservando compatibilidade na transição.
+            </p>
+            <p class="card-foot">Foco: Coexistência Clássica + PQC</p>
           </article>
 
-          <article class="pillar-card">
-            <div>
-              <div class="pillar-code">FRENTE 03</div>
-              <h3>Protótipo &amp; Validação em Laboratório</h3>
-              <p>
-                API de referência e testes de desempenho e latência executados em ambiente controlado para avaliar impacto real de tamanho de payloads e processamento antes de tocar produção.
-              </p>
-            </div>
-            <div class="pillar-foot">Foco: Medição Real em Laboratório</div>
+          <article class="card">
+            <span class="card-step">FRENTE 03</span>
+            <h3>Protótipo &amp; Validação em Laboratório</h3>
+            <p>
+              API de referência e testes de desempenho e latência executados em ambiente controlado para medir
+              tamanho de payloads, comportamento de handshake e processamento antes de tocar produção.
+            </p>
+            <p class="card-foot">Foco: Medição Real em Laboratório</p>
           </article>
-        </div>
-
-        <div class="scope-list">
-          <div class="scope-item">
-            <div class="scope-item-title">Troca de Chaves (KEM)</div>
-            <p class="scope-item-copy">Combinação de X25519 com ML-KEM-768 para reforçar o sigilo de fluxos sensíveis contra coleta antecipada.</p>
-          </div>
-          <div class="scope-item">
-            <div class="scope-item-title">Autenticidade &amp; Assinatura</div>
-            <p class="scope-item-copy">Avaliação de ML-DSA conforme FIPS 204 para cenários de integridade e verificação criptográfica.</p>
-          </div>
-          <div class="scope-item">
-            <div class="scope-item-title">Governança &amp; Auditoria</div>
-            <p class="scope-item-copy">Rastreabilidade de ativos criptográficos para apoiar revisões técnicas e requisitos regulatórios.</p>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Conversa Direta -->
-    <section id="contato" class="contact-section">
+    <section id="conversa" class="section">
       <div class="container">
-        <div class="contact-panel">
-          <div>
-            <div class="section-label">03 // Conversa Direta</div>
-            <h2>Avaliação técnica de 15 a 20 minutos</h2>
-            <p class="section-intro" style="margin-bottom: 0;">
-              Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição do seu ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
-            </p>
-          </div>
+        <p class="section-code">03 // CONVERSA DIRETA</p>
+        <h2>Avaliação técnica de 15 a 20 minutos</h2>
+        <p class="lead">
+          Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição do seu
+          ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
+        </p>
 
-          <div class="contact-actions">
-            <a
-              href="mailto:gabrielberbeki@qryptal.com.br?subject=Avalia%C3%A7%C3%A3o%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal&body=Ol%C3%A1%20Gabriel%2C%20gostaria%20de%20agendar%20uma%20conversa%20t%C3%A9cnica%20de%2015%20a%2020%20minutos.%0A%0AContexto%20do%20ambiente%3A%20%0AHorizonte%20de%20reten%C3%A7%C3%A3o%20dos%20dados%3A%20%0AObjetivo%20da%20conversa%3A%20"
-              class="btn-primary"
-            >
-              Agendar por e-mail
-            </a>
-            <button type="button" id="copy-email-btn" class="btn-secondary" data-email="gabrielberbeki@qryptal.com.br">
-              Copiar gabrielberbeki@qryptal.com.br
-            </button>
-          </div>
-
-          <p class="brief-hint">
-            <strong>Para aproveitar melhor os 20 minutos:</strong> informe na mensagem o tipo de ambiente (API, mensageria, PKI ou dados em repouso), o horizonte de retenção das informações sensíveis e o foco principal da avaliação.
-          </p>
+        <div class="actions">
+          <a
+            class="btn btn-primary"
+            href="mailto:gabrielberbeki@qryptal.com.br?subject=Conversa%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
+          >
+            Agendar por e-mail
+          </a>
+          <button type="button" class="btn btn-secondary" id="copy-email-btn">
+            Copiar gabrielberbeki@qryptal.com.br
+          </button>
+          <span id="copy-feedback" class="copy-feedback" aria-live="polite"></span>
         </div>
+
+        <p class="note">
+          Para aproveitar melhor os 20 minutos: informe na mensagem o tipo de ambiente (API, mensageria, PKI ou dados
+          em repouso), o horizonte de retenção das informações sensíveis e o foco principal da avaliação.
+        </p>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="container footer-inner">
       <span>© 2026 Qryptal · Segurança Criptográfica &amp; Transição Pós-Quântica</span>
-      <span>gabrielberbeki@qryptal.com.br</span>
+      <a href="mailto:gabrielberbeki@qryptal.com.br">gabrielberbeki@qryptal.com.br</a>
     </div>
   </footer>
 
   <script>
-    (function () {
-      const btn = document.getElementById('copy-email-btn');
-      if (!btn) return;
+    const copyBtn = document.getElementById("copy-email-btn");
+    const feedback = document.getElementById("copy-feedback");
+    const emailAddress = "gabrielberbeki@qryptal.com.br";
 
-      btn.addEventListener('click', function () {
-        const email = btn.getAttribute('data-email');
-        const originalText = btn.textContent;
-
-        function confirmCopied() {
-          btn.textContent = 'E-mail copiado';
-          setTimeout(function () {
-            btn.textContent = originalText;
-          }, 2200);
-        }
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(email).then(confirmCopied).catch(function () {
-            fallbackCopy(email, confirmCopied);
-          });
-        } else {
-          fallbackCopy(email, confirmCopied);
+    if (copyBtn) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(emailAddress);
+          feedback.textContent = "E-mail copiado.";
+        } catch {
+          feedback.textContent = emailAddress;
         }
       });
-
-      function fallbackCopy(text, callback) {
-        const tempInput = document.createElement('input');
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        try {
-          document.execCommand('copy');
-          callback();
-        } catch (e) {}
-        document.body.removeChild(tempInput);
-      }
-    })();
+    }
   </script>
-
 </body>
 </html>
