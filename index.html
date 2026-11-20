@@ -8,124 +8,144 @@
     name="description"
     content="Inventário criptográfico (CBOM), desenho de arquitetura híbrida (X25519 + ML-KEM-768 / ML-DSA) e validação em laboratório alinhados ao NIST IR 8547 para redução de risco HNDL."
   />
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23090b0e'/%3E%3Ccircle cx='14.5' cy='14.5' r='7.5' fill='none' stroke='%2322d3ee' stroke-width='2.3'/%3E%3Cline x1='18' y1='18' x2='24.5' y2='24.5' stroke='%23f3f4f6' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"
+  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <div class="container topbar-inner">
-      <a href="#topo" class="brand">
-        <span class="brand-name">Qryptal</span>
-        <span class="brand-sep">/</span>
-        <span class="brand-tag">Segurança &amp; Criptografia PQC</span>
+    <div class="container nav">
+      <a href="#topo" class="brand" aria-label="Qryptal — Início">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="29" height="29" rx="6" fill="#11141a" stroke="#1e2430" />
+          <circle cx="14.5" cy="14.5" r="7.5" stroke="#22d3ee" stroke-width="2.2" />
+          <line x1="18" y1="18" x2="24.5" y2="24.5" stroke="#f3f4f6" stroke-width="2.4" stroke-linecap="round" />
+        </svg>
+        <span class="brand-title">Qryptal</span>
+        <span class="brand-sub">Segurança &amp; Criptografia PQC</span>
       </a>
-      <a href="#conversa" class="btn btn-secondary">Conversa Técnica</a>
+      <a href="#conversa" class="btn btn-ghost">Conversa Técnica</a>
     </div>
   </header>
 
   <main id="topo">
     <section class="hero">
       <div class="container">
-        <p class="eyebrow">TRANSIÇÃO PÓS-QUÂNTICA · NIST IR 8547 &amp; FIPS 203/204/205</p>
+        <p class="eyebrow mono">TRANSIÇÃO PÓS-QUÂNTICA · NIST IR 8547 &amp; FIPS 203 / 204 / 205</p>
         <h1>Inventário criptográfico e transição segura antes da mudança em produção.</h1>
         <p class="lead">
-          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em laboratório
-          para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração futura (HNDL)
-          sem quebrar sistemas ativos — alinhados ao cronograma do NIST IR 8547 (outubro de 2026).
+          Estruturamos o mapeamento de exposição (CBOM), o desenho de arquitetura híbrida e a validação em
+          laboratório para ambientes regulados que precisam reduzir o risco de coleta antecipada para decifração
+          futura (HNDL) sem quebrar sistemas ativos — alinhados ao cronograma do NIST IR 8547 (outubro de 2026).
         </p>
-        <p class="meta-line">
-          Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong> ·
-          <span>X25519 + ML-KEM-768</span> · <span>ML-DSA</span> · <span>CBOM</span> ·
-          <span>NIST IR 8547</span> · <span>Ambientes Regulados</span>
-        </p>
+        <div class="tags">
+          <span>Arquitetura e execução conduzidas por <strong>Gabriel Patrick Berbeki</strong></span>
+          <span class="tag mono">X25519 + ML-KEM-768</span>
+          <span class="tag mono">ML-DSA</span>
+          <span class="tag mono">CBOM</span>
+          <span class="tag mono">NIST IR 8547</span>
+          <span class="tag">Ambientes Regulados</span>
+        </div>
       </div>
     </section>
 
-    <section id="risco" class="section">
+    <section class="block">
       <div class="container">
-        <p class="section-code">01 // RISCO &amp; CRONOGRAMA (NIST IR 8547)</p>
+        <p class="section-code mono">01 // RISCO &amp; CRONOGRAMA (NIST IR 8547)</p>
         <h2>Alterar criptografia sem inventário prévio expõe a operação; adiar o diagnóstico aumenta o risco de atraso.</h2>
-        <div class="prose-grid">
+        <div class="two-col">
           <p>
-            Com a publicação final do NIST IR 8547 em outubro de 2026, o horizonte de depreciação e descontinuação
-            de algoritmos clássicos vulneráveis (como RSA e ECC) ganha marcos claros entre 2030 e 2035. Dados e fluxos
-            protegidos hoje por criptografia assimétrica clássica podem ser capturados agora para decifração futura
-            (HNDL — Harvest Now, Decrypt Later), exigindo atenção antecipada para informações com longo horizonte de sigilo.
+            Com a versão final do NIST IR 8547 publicada em outubro de 2026, o horizonte de depreciação e
+            descontinuação de criptografia assimétrica clássica vulnerável (como RSA e ECC) ganha marcos claros
+            entre 2030 e 2035. Dados e fluxos protegidos hoje podem ser capturados agora para decifração futura
+            (HNDL — Harvest Now, Decrypt Later), exigindo atenção antecipada para informações com longo horizonte
+            de sigilo.
           </p>
           <p>
-            Por outro lado, trocar chaves, certificados, bibliotecas ou módulos de segurança no escuro — sem mapear
-            dependências em aplicações, APIs, PKI e HSMs — provoca indisponibilidade e falhas de conformidade.
-            A transição segura começa pelo diagnóstico controlado.
+            Ao mesmo tempo, alterar chaves, certificados e bibliotecas sem conhecer dependências em aplicações, APIs,
+            PKI e HSMs gera indisponibilidade e falhas de conformidade. A transição segura começa pelo diagnóstico
+            controlado.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="escopo" class="section section-alt">
+    <section class="block block-alt">
       <div class="container">
-        <p class="section-code">02 // ESCOPO &amp; ENTREGAS</p>
+        <p class="section-code mono">02 // ESCOPO &amp; ENTREGAS</p>
         <h2>O que existe e é aplicado hoje</h2>
-        <p class="section-subtitle">
+        <p class="lead">
           Clareza técnica e validação incremental: mapear o que existe, definir modelos híbridos com fronteiras
           claras e testar comportamento prático antes de qualquer mudança ampla.
         </p>
 
-        <div class="cards">
+        <div class="grid-3">
           <article class="card">
-            <span class="card-step">FRENTE 01</span>
-            <h3>Mapeamento de Exposição &amp; CBOM</h3>
-            <p>
-              Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão distribuídos,
-              priorizando ativos por criticidade e tempo de retenção do dado.
-            </p>
-            <p class="card-foot">Base: Inventário CBOM &amp; Priorização</p>
+            <div>
+              <p class="card-kicker mono">FRENTE 01</p>
+              <h3>Mapeamento de Exposição &amp; CBOM</h3>
+              <p>
+                Levantamento pragmático de onde chaves, certificados, protocolos e fluxos sensíveis estão
+                distribuídos, priorizando ativos por criticidade e tempo de retenção do dado.
+              </p>
+            </div>
+            <p class="card-meta mono">Base: Inventário CBOM &amp; Priorização de Risco</p>
           </article>
 
           <article class="card">
-            <span class="card-step">FRENTE 02</span>
-            <h3>Arquitetura Híbrida &amp; Padrões</h3>
-            <p>
-              Desenho de encapsulamento/troca de chaves híbrida (X25519 + ML-KEM-768) e assinaturas digitais
-              pós-quânticas (ML-DSA) alinhadas ao NIST IR 8547 e FIPS 203/204, preservando compatibilidade na transição.
-            </p>
-            <p class="card-foot">Foco: Coexistência Clássica + PQC</p>
+            <div>
+              <p class="card-kicker mono">FRENTE 02</p>
+              <h3>Arquitetura Híbrida &amp; Padrões</h3>
+              <p>
+                Desenho de encapsulamento/troca de chaves híbrida (X25519 + ML-KEM-768) e assinaturas digitais
+                pós-quânticas (ML-DSA) alinhadas ao NIST IR 8547 e FIPS 203/204, preservando compatibilidade na
+                transição.
+              </p>
+            </div>
+            <p class="card-meta mono">Foco: Coexistência Clássica + PQC</p>
           </article>
 
           <article class="card">
-            <span class="card-step">FRENTE 03</span>
-            <h3>Protótipo &amp; Validação em Laboratório</h3>
-            <p>
-              API de referência e testes de desempenho e latência executados em ambiente controlado para medir
-              tamanho de payloads, comportamento de handshake e processamento antes de tocar produção.
-            </p>
-            <p class="card-foot">Foco: Medição Real em Laboratório</p>
+            <div>
+              <p class="card-kicker mono">FRENTE 03</p>
+              <h3>Protótipo &amp; Validação em Laboratório</h3>
+              <p>
+                API de referência e testes de desempenho e latência executados em ambiente controlado para medir
+                tamanho de payloads, comportamento de handshake e processamento antes de tocar produção.
+              </p>
+            </div>
+            <p class="card-meta mono">Foco: Medição Real em Laboratório</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="conversa" class="section">
+    <section id="conversa" class="block">
       <div class="container">
-        <p class="section-code">03 // CONVERSA DIRETA</p>
+        <p class="section-code mono">03 // CONVERSA DIRETA</p>
         <h2>Avaliação técnica de 15 a 20 minutos</h2>
         <p class="lead">
-          Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição do seu
-          ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
+          Se você atua em segurança da informação, arquitetura ou conformidade e quer revisar os pontos de exposição do
+          seu ambiente, podemos fazer uma conversa objetiva — sem apresentação comercial longa.
         </p>
 
-        <div class="actions">
+        <div class="cta-actions">
           <a
+            href="mailto:gabrielberbeki@qryptal.com.br?subject=Avalia%C3%A7%C3%A3o%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
             class="btn btn-primary"
-            href="mailto:gabrielberbeki@qryptal.com.br?subject=Conversa%20T%C3%A9cnica%20PQC%20%E2%80%94%20Qryptal"
           >
             Agendar por e-mail
           </a>
-          <button type="button" class="btn btn-secondary" id="copy-email-btn">
+          <button type="button" id="copy-email" class="btn btn-ghost">
             Copiar gabrielberbeki@qryptal.com.br
           </button>
-          <span id="copy-feedback" class="copy-feedback" aria-live="polite"></span>
+          <span id="copy-status" class="feedback mono" aria-live="polite"></span>
         </div>
 
-        <p class="note">
+        <p class="helper">
           Para aproveitar melhor os 20 minutos: informe na mensagem o tipo de ambiente (API, mensageria, PKI ou dados
           em repouso), o horizonte de retenção das informações sensíveis e o foco principal da avaliação.
         </p>
@@ -133,25 +153,25 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
+  <footer>
+    <div class="container footer-row">
       <span>© 2026 Qryptal · Segurança Criptográfica &amp; Transição Pós-Quântica</span>
       <a href="mailto:gabrielberbeki@qryptal.com.br">gabrielberbeki@qryptal.com.br</a>
     </div>
   </footer>
 
   <script>
-    const copyBtn = document.getElementById("copy-email-btn");
-    const feedback = document.getElementById("copy-feedback");
-    const emailAddress = "gabrielberbeki@qryptal.com.br";
+    const copyBtn = document.getElementById("copy-email");
+    const statusEl = document.getElementById("copy-status");
+    const email = "gabrielberbeki@qryptal.com.br";
 
     if (copyBtn) {
       copyBtn.addEventListener("click", async () => {
         try {
-          await navigator.clipboard.writeText(emailAddress);
-          feedback.textContent = "E-mail copiado.";
+          await navigator.clipboard.writeText(email);
+          statusEl.textContent = "E-mail copiado.";
         } catch {
-          feedback.textContent = emailAddress;
+          statusEl.textContent = email;
         }
       });
     }
