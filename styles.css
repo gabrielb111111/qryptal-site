@@ -60,7 +60,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  min-height: 72px;
   gap: 16px;
 }
 
@@ -78,6 +78,7 @@ header {
 .brand-mark {
   width: 34px;
   height: 34px;
+  flex-shrink: 0;
   border: 1.5px solid var(--accent-cyan);
   background-color: var(--accent-cyan-dim);
   border-radius: 6px;
@@ -93,6 +94,7 @@ header {
 .nav-actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -107,7 +109,7 @@ header {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   border: 1px solid transparent;
 }
 
@@ -386,6 +388,7 @@ section.block {
 .email-pill {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   background-color: var(--bg-primary);
   border: 1px solid var(--border-subtle);
@@ -394,6 +397,7 @@ section.block {
   font-family: var(--font-mono);
   font-size: 0.88rem;
   color: var(--text-primary);
+  overflow-wrap: anywhere;
 }
 
 .copy-btn {
@@ -535,5 +539,40 @@ footer a:hover {
 
   .cta-box {
     padding: 28px 22px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-inner {
+    flex-wrap: wrap;
+    padding: 12px 0;
+  }
+
+  .hero {
+    padding: 56px 0 48px;
+  }
+
+  section.block {
+    padding: 52px 0;
+  }
+
+  .cta-section {
+    padding: 56px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .scope-card,
+  .layer-card {
+    transition: none;
+  }
+
+  .btn-gold:hover {
+    transform: none;
   }
 }
