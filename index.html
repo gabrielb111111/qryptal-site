@@ -19,8 +19,8 @@
 <body>
   <header>
     <div class="container nav-inner">
-      <a href="#" class="brand" aria-label="Qryptal">
-        <span class="brand-mark">Q</span>
+      <a href="#top" class="brand" aria-label="Qryptal — Início">
+        <span class="brand-mark" aria-hidden="true">Q</span>
         <span>Qryptal</span>
       </a>
       <nav class="nav-actions" aria-label="Navegação principal">
@@ -31,7 +31,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="container">
         <span class="eyebrow">Post-Quantum Cryptography · Governança e Evidência</span>
@@ -250,7 +250,7 @@
             </a>
             <div class="email-pill">
               <span id="contactEmail">gabrielberbeki@qryptal.com.br</span>
-              <button type="button" class="copy-btn" id="copyEmailBtn">Copiar</button>
+              <button type="button" class="copy-btn" id="copyEmailBtn" aria-live="polite">Copiar</button>
             </div>
           </div>
 
@@ -278,9 +278,9 @@
       </div>
       <p>Como classificamos cada item antes de consolidar o diagnóstico:</p>
       <ul class="checklist">
-        <li><span>[VERIFIED]</span> Comprovado por inspeção direta, registro conferido ou medição formal.</li>
-        <li><span>[PENDING_EVIDENCE]</span> Dependente de retorno de fornecedor/HSM ou execução de teste.</li>
-        <li><span>[HYPOTHESIS]</span> Premissa inicial de análise até comprovação em escopo real.</li>
+        <li><span aria-hidden="true">[VERIFIED]</span> Comprovado por inspeção direta, registro conferido ou medição formal.</li>
+        <li><span aria-hidden="true">[PENDING_EVIDENCE]</span> Dependente de retorno de fornecedor/HSM ou execução de teste.</li>
+        <li><span aria-hidden="true">[HYPOTHESIS]</span> Premissa inicial de análise até comprovação em escopo real.</li>
       </ul>
       <button type="button" class="btn btn-gold btn-sm" id="closeChecklistBottomBtn">Entendido</button>
     </div>
@@ -294,13 +294,47 @@
       const closeBottomBtn = document.getElementById("closeChecklistBottomBtn");
       const copyBtn = document.getElementById("copyEmailBtn");
       const emailEl = document.getElementById("contactEmail");
+      let copyTimer = null;
 
       function openModal() {
+        if (!modal) return;
         modal.classList.add("active");
+        if (closeBtn) closeBtn.focus();
       }
 
       function closeModal() {
+        if (!modal) return;
         modal.classList.remove("active");
+        if (openBtn) openBtn.focus();
+      }
+
+      function fallbackCopy(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        let copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch (err) {
+          copied = false;
+        }
+        document.body.removeChild(textarea);
+        return Promise.resolve(copied);
+      }
+
+      function setCopiedFeedback() {
+        if (!copyBtn) return;
+        const original = copyBtn.dataset.originalLabel || copyBtn.textContent;
+        copyBtn.dataset.originalLabel = original;
+        copyBtn.textContent = "Copiado";
+        if (copyTimer) clearTimeout(copyTimer);
+        copyTimer = setTimeout(function () {
+          copyBtn.textContent = original;
+        }, 1600);
       }
 
       if (openBtn) openBtn.addEventListener("click", openModal);
@@ -323,13 +357,15 @@
         copyBtn.addEventListener("click", function () {
           const text = emailEl.textContent.trim();
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(function () {
-              const original = copyBtn.textContent;
-              copyBtn.textContent = "Copiado";
-              setTimeout(function () {
-                copyBtn.textContent = original;
-              }, 1600);
-            }).catch(function () {});
+            navigator.clipboard.writeText(text).then(setCopiedFeedback).catch(function () {
+              fallbackCopy(text).then(function (ok) {
+                if (ok) setCopiedFeedback();
+              });
+            });
+          } else {
+            fallbackCopy(text).then(function (ok) {
+              if (ok) setCopiedFeedback();
+            });
           }
         });
       }
