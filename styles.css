@@ -15,7 +15,9 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -31,6 +33,11 @@ body {
   font-family: var(--font-sans);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
 }
 
 .container {
@@ -263,7 +270,7 @@ section.block {
   margin-bottom: 20px;
 }
 
-/* Scope Cards */
+/* Scope & 4-Layer Grids */
 .scope-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -271,7 +278,15 @@ section.block {
   margin-top: 36px;
 }
 
-.scope-card {
+.layers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 32px;
+}
+
+.scope-card,
+.layer-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
@@ -282,11 +297,13 @@ section.block {
   transition: border-color 0.2s ease;
 }
 
-.scope-card:hover {
+.scope-card:hover,
+.layer-card:hover {
   border-color: var(--border-gold);
 }
 
-.scope-num {
+.scope-num,
+.layer-code {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 600;
@@ -296,25 +313,41 @@ section.block {
   display: block;
 }
 
-.scope-card h3 {
+.scope-card h3,
+.layer-card h3 {
   font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 14px;
   color: var(--text-primary);
 }
 
-.scope-card p {
+.scope-card p,
+.layer-card p {
   font-size: 0.925rem;
   color: var(--text-secondary);
   margin-bottom: 22px;
 }
 
-.scope-focus {
+.scope-focus,
+.layer-meta {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--accent-cyan);
   padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
+}
+
+.evidence-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-gold);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
 }
 
 /* Conversion Box */
@@ -495,7 +528,8 @@ footer a:hover {
 
 @media (max-width: 860px) {
   .metrics-grid,
-  .scope-grid {
+  .scope-grid,
+  .layers-grid {
     grid-template-columns: 1fr;
   }
 
