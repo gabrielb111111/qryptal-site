@@ -1,704 +1,338 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
-  <!-- Viewport & encoding configuration for responsive banking/executive readability -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qryptal | Diagnóstico Criptográfico Pós-Quântico (PQC) e Governança de Evidências</title>
-
-  <!-- Load Inter font family and Tailwind CSS -->
+  <title>Qryptal — Diagnóstico Criptográfico Pós-Quântico e Evidências</title>
+  <meta
+    name="description"
+    content="Diagnóstico criptográfico pós-quântico (PQC), CBOM, taxonomia em 4 camadas e governança de evidências alinhados a NIST IR 8547 (Oct 2026), FIPS 203 (ML-KEM) e FIPS 204 (ML-DSA)."
+  />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Tailwind theme configuration preserving charcoal/obsidian surfaces and gold accents -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-          },
-          colors: {
-            obsidian: "#090B0E",
-            charcoal: "#10141A",
-            surface: "#151A22",
-            line: "#242C38",
-            gold: {
-              DEFAULT: "#C8A45D",
-              bright: "#D4AF37",
-              muted: "#9E7F40",
-            },
-          },
-        },
-      },
-    };
-  </script>
-
-  <style>
-    /* Base dark surface and crisp border helpers up to gold accent */
-    body {
-      background-color: #090B0E;
-      color: #F3F4F6;
-      font-family: "Inter", system-ui, -apple-system, sans-serif;
-    }
-
-    .gold-rule {
-      background: linear-gradient(90deg, rgba(200, 164, 93, 0.75) 0%, rgba(212, 175, 55, 0.15) 100%);
-    }
-
-    .card-panel {
-      background-color: #10141A;
-      border: 1px solid #242C38;
-      border-radius: 0.75rem;
-      transition: border-color 180ms ease, transform 180ms ease;
-    }
-
-    .card-panel:hover {
-      border-color: rgba(200, 164, 93, 0.55);
-    }
-
-    .btn-gold {
-      background-color: #C8A45D;
-      color: #090B0E;
-      border: 1px solid #D4AF37;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      transition: background-color 160ms ease, transform 160ms ease;
-    }
-
-    .btn-gold:hover {
-      background-color: #D4AF37;
-    }
-
-    .btn-secondary {
-      background-color: #151A22;
-      color: #F3F4F6;
-      border: 1px solid #242C38;
-      border-radius: 0.5rem;
-      font-weight: 500;
-      transition: border-color 160ms ease, color 160ms ease;
-    }
-
-    .btn-secondary:hover {
-      border-color: #C8A45D;
-      color: #D4AF37;
-    }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="antialiased selection:bg-[#C8A45D]/25 selection:text-[#D4AF37]">
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-40 border-b border-line bg-obsidian/95 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="#" class="flex items-center gap-3 text-white focus:outline-none">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-gold/60 bg-charcoal text-xs font-bold tracking-widest text-gold-bright">
-          Q
-        </span>
-        <span class="text-sm font-semibold tracking-[0.22em] text-white">QRYPTAL</span>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="Qryptal">
+        <span class="brand-mark">Q</span>
+        <span>Qryptal</span>
       </a>
-
-      <nav aria-label="Navegação principal" class="hidden items-center gap-7 text-sm text-gray-300 md:flex">
-        <a href="#escopo" class="transition hover:text-gold-bright">Escopo</a>
-        <a href="#camadas" class="transition hover:text-gold-bright">4 Camadas</a>
-        <a href="#evidencias" class="transition hover:text-gold-bright">Evidências</a>
-        <a href="#fluxo" class="transition hover:text-gold-bright">Fluxo</a>
+      <nav class="nav-actions" aria-label="Navegação principal">
+        <a href="#camadas" class="btn btn-sm btn-cyan-outline">4 Camadas</a>
+        <a href="#evidencias" class="btn btn-sm btn-cyan-outline">Evidências</a>
+        <a href="#contato" class="btn btn-sm btn-gold">Diagnóstico</a>
       </nav>
-
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button
-          type="button"
-          data-open-diagnostic
-          class="btn-gold px-3.5 py-2 text-xs sm:px-4 sm:text-sm"
-        >
-          Solicitar diagnóstico técnico
-        </button>
-      </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero Section aligned to NIST IR 8547 (Oct 2026), FIPS 203 (ML-KEM), and FIPS 204 (ML-DSA) -->
-    <section class="relative overflow-hidden border-b border-line bg-obsidian py-16 sm:py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl">
-          <div class="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-gold/40 bg-charcoal px-3.5 py-1.5 text-xs font-medium text-gold-bright">
-            <span>NIST IR 8547 (Oct 2026)</span>
-            <span class="text-gold-muted">•</span>
-            <span>FIPS 203 (ML-KEM)</span>
-            <span class="text-gold-muted">•</span>
-            <span>FIPS 204 (ML-DSA)</span>
-          </div>
-
-          <h1 class="text-3xl font-bold tracking-tight text-white sm:text-5xl sm:leading-[1.12]">
-            Diagnóstico criptográfico pós-quântico com rastreabilidade de evidências para operações financeiras.
-          </h1>
-
-          <p class="mt-6 max-w-3xl text-base leading-relaxed text-gray-300 sm:text-lg">
-            Mapeamos dependências criptográficas (<span class="font-semibold text-white">CBOM</span>), avaliamos prontidão
-            por camada operacional e estruturamos a transição PQC alinhados a
-            <strong class="font-semibold text-white">NIST IR 8547 (Oct 2026)</strong>,
-            <strong class="font-semibold text-white">FIPS 203 (ML-KEM)</strong> e
-            <strong class="font-semibold text-white">FIPS 204 (ML-DSA)</strong> — mantendo separação estrita entre
-            fatos verificados, pendências de evidência e hipóteses de trabalho.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <button
-              type="button"
-              data-open-diagnostic
-              class="btn-gold px-6 py-3 text-sm text-center"
-            >
-              Solicitar diagnóstico técnico
-            </button>
-            <a
-              href="#camadas"
-              class="btn-secondary px-6 py-3 text-sm text-center"
-            >
-              Arquitetura em 4 camadas
-            </a>
-          </div>
-        </div>
-
-        <div class="gold-rule mt-14 h-px w-full"></div>
-
-        <!-- Objective Technical Summary Strip -->
-        <dl class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-          <div class="rounded-lg border border-line bg-charcoal p-4">
-            <dt class="text-xs font-semibold uppercase tracking-wider text-gold">Base Normativa</dt>
-            <dd class="mt-1.5 text-sm text-gray-200">
-              NIST IR 8547 (Oct 2026), FIPS 203 (ML-KEM) e FIPS 204 (ML-DSA) aplicados a inventário e prontidão.
-            </dd>
-          </div>
-          <div class="rounded-lg border border-line bg-charcoal p-4">
-            <dt class="text-xs font-semibold uppercase tracking-wider text-gold">Estado de Evidência</dt>
-            <dd class="mt-1.5 text-sm text-gray-200">
-              Controle explícito entre <code class="text-gold-bright">VERIFIED</code>,
-              <code class="text-gold-bright">PENDING_EVIDENCE</code> e
-              <code class="text-gold-bright">HYPOTHESIS</code>.
-            </dd>
-          </div>
-          <div class="rounded-lg border border-line bg-charcoal p-4">
-            <dt class="text-xs font-semibold uppercase tracking-wider text-gold">Escopo Real</dt>
-            <dd class="mt-1.5 text-sm text-gray-200">
-              Diagnóstico, CBOM, critérios por camada e diretrizes híbridas — sem prometer troca automática em produção.
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-
-    <!-- Scope & Deliverables Section -->
-    <section id="escopo" class="border-b border-line bg-charcoal/50 py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">O Que Entregamos Hoje</p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Clareza técnica e rastreabilidade antes de qualquer mudança em produção.
-          </h2>
-          <p class="mt-4 text-sm leading-relaxed text-gray-300 sm:text-base">
-            Ambientes financeiros exigem evidência auditável, validação de HSM/KMS e medição de desempenho antes de
-            decisões críticas. A Qryptal não promete migração mágica nem substitui testes de engenharia ou
-            retorno de fornecedores: entregamos base factual estruturada para comitês técnicos, segurança e auditoria.
-          </p>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <!-- Deliverable 1 -->
-          <article class="card-panel flex flex-col justify-between p-6">
-            <div>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-wider text-gold">01 / Inventário</span>
-                <span class="rounded border border-gold/30 bg-surface px-2 py-0.5 text-[11px] font-medium text-gold-bright">
-                  CBOM
-                </span>
-              </div>
-              <h3 class="mt-4 text-lg font-semibold text-white">Inventário e CBOM</h3>
-              <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-                Consolidação de ativos, algoritmos, dependências criptográficas e lacunas de informação segmentadas por
-                camada operacional, com suporte à conferência de integridade.
-              </p>
-            </div>
-            <div class="mt-6 border-t border-line pt-4 text-xs text-gray-400">
-              Alinhado a NIST IR 8547 (Oct 2026) e rastreabilidade de artefatos.
-            </div>
-          </article>
-
-          <!-- Deliverable 2 -->
-          <article class="card-panel flex flex-col justify-between p-6">
-            <div>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-wider text-gold">02 / Governança</span>
-                <span class="rounded border border-gold/30 bg-surface px-2 py-0.5 text-[11px] font-medium text-gold-bright">
-                  3 Estados
-                </span>
-              </div>
-              <h3 class="mt-4 text-lg font-semibold text-white">Disciplina de Evidências</h3>
-              <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-                Classificação objetiva em <code class="text-gold-bright">VERIFIED</code>,
-                <code class="text-gold-bright">PENDING_EVIDENCE</code> e <code class="text-gold-bright">HYPOTHESIS</code>,
-                impedindo que suposições ou pendências sejam tratadas como prontidão comprovada.
-              </p>
-            </div>
-            <div class="mt-6 border-t border-line pt-4 text-xs text-gray-400">
-              Critérios explícitos de promoção por camada e contexto de verificação.
-            </div>
-          </article>
-
-          <!-- Deliverable 3 -->
-          <article class="card-panel flex flex-col justify-between p-6">
-            <div>
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-wider text-gold">03 / Transição</span>
-                <span class="rounded border border-gold/30 bg-surface px-2 py-0.5 text-[11px] font-medium text-gold-bright">
-                  Híbrido
-                </span>
-              </div>
-              <h3 class="mt-4 text-lg font-semibold text-white">Roteiro e Transição Híbrida</h3>
-              <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-                Diretrizes graduais de transição híbrida, critérios para testes em homologação e priorização por risco
-                operacional, sem promessas de substituição automática sem validação.
-              </p>
-            </div>
-            <div class="mt-6 border-t border-line pt-4 text-xs text-gray-400">
-              Considera FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) e comportamento em carga.
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 Operational Layers Section -->
-    <section id="camadas" class="border-b border-line bg-obsidian py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div class="max-w-3xl">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Arquitetura em 4 Camadas</p>
-            <h2 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Avaliação segmentada onde o risco e o atrito operacional ocorrem.
-            </h2>
-          </div>
-          <p class="text-xs text-gray-400">
-            Camadas: <span class="text-gray-200">Credentials · Settlement · Financial Transaction · Ledger</span>
-          </p>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <!-- Layer 1: Credentials -->
-          <article class="card-panel p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-white">Credentials</h3>
-              <span class="text-xs font-medium text-gold">Camada 01</span>
-            </div>
-            <p class="mt-3 text-sm leading-relaxed text-gray-300">
-              Gestão de chaves, identidades, certificados, políticas de KMS/signers e sessões. Avalia exposição de
-              credenciais, rotação, governança de acesso e aderência a políticas criptográficas.
-            </p>
-            <div class="mt-4 rounded-lg border border-line bg-surface p-3.5 text-xs text-gray-300">
-              <span class="font-semibold text-gold-bright">Critério de promoção para VERIFIED:</span> inventário de
-              chaves/certificados conferido, políticas de KMS/signers inspecionadas e trilha de configuração
-              registrada no escopo avaliado.
-            </div>
-          </article>
-
-          <!-- Layer 2: Settlement -->
-          <article class="card-panel p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-white">Settlement</h3>
-              <span class="text-xs font-medium text-gold">Camada 02</span>
-            </div>
-            <p class="mt-3 text-sm leading-relaxed text-gray-300">
-              Liquidação financeira, confiança criptográfica entre partes e suporte real de HSMs a esquemas como
-              <strong class="font-semibold text-white">FIPS 203 (ML-KEM)</strong> e
-              <strong class="font-semibold text-white">FIPS 204 (ML-DSA)</strong>.
-            </p>
-            <div class="mt-4 rounded-lg border border-line bg-surface p-3.5 text-xs text-gray-300">
-              <span class="font-semibold text-gold-bright">Critério de promoção para VERIFIED:</span> confirmação
-              documental e técnica de suporte no hardware/firmware alvo (incluindo limites e contingência), sem
-              depender de premissa não confirmada.
-            </div>
-          </article>
-
-          <!-- Layer 3: Financial Transaction -->
-          <article class="card-panel p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-white">Financial Transaction</h3>
-              <span class="text-xs font-medium text-gold">Camada 03</span>
-            </div>
-            <p class="mt-3 text-sm leading-relaxed text-gray-300">
-              Integridade de mensagens e transações financeiras, com atenção explícita ao impacto de payload e
-              latência (<code class="text-gold-bright">p95</code>/<code class="text-gold-bright">p99</code>) em
-              ambientes de teste/homologação.
-            </p>
-            <div class="mt-4 rounded-lg border border-line bg-surface p-3.5 text-xs text-gray-300">
-              <span class="font-semibold text-gold-bright">Critério de promoção para VERIFIED:</span> medição
-              registrada em ambiente de teste/homologação com <code class="text-gold-bright">p95</code>/<code class="text-gold-bright">p99</code>
-              e payload avaliados — tomando variações de referência na ordem de <strong class="text-white">+298B</strong>
-              apenas como contexto sujeito a esquema, serialização e rede.
-            </div>
-          </article>
-
-          <!-- Layer 4: Ledger -->
-          <article class="card-panel p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-white">Ledger</h3>
-              <span class="text-xs font-medium text-gold">Camada 04</span>
-            </div>
-            <p class="mt-3 text-sm leading-relaxed text-gray-300">
-              Trilha de auditoria, consistência e retenção de registros críticos ao longo do tempo, avaliando
-              integridade histórica, dependências criptográficas e requisitos de retenção.
-            </p>
-            <div class="mt-4 rounded-lg border border-line bg-surface p-3.5 text-xs text-gray-300">
-              <span class="font-semibold text-gold-bright">Critério de promoção para VERIFIED:</span> verificação
-              comprovada da trilha de auditoria, consistência de registros e controles criptográficos aplicados em
-              escopo.
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Evidence Governance States Section -->
-    <section id="evidencias" class="border-b border-line bg-charcoal/50 py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Governança de Evidências</p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Três estados formais para evitar prontidão aparente.
-          </h2>
-          <p class="mt-4 text-sm leading-relaxed text-gray-300 sm:text-base">
-            Cada camada e item de diagnóstico é registrado com um estado explícito. Evidência possui contexto e
-            validade: alterações de firmware, configuração de KMS ou parâmetros de rede exigem nova conferência.
-          </p>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <!-- VERIFIED -->
-          <div class="card-panel p-6">
-            <div class="inline-flex items-center rounded-md border border-gold/60 bg-surface px-3 py-1 text-xs font-bold tracking-wider text-gold-bright">
-              VERIFIED
-            </div>
-            <h3 class="mt-4 text-base font-semibold text-white">Inspecionado ou Medido em Escopo</h3>
-            <p class="mt-2 text-sm leading-relaxed text-gray-300">
-              Respaldado por inspeção conferida, configuração verificada, retorno formal ou medição registrada dentro
-              do escopo avaliado.
-            </p>
-          </div>
-
-          <!-- PENDING_EVIDENCE -->
-          <div class="card-panel p-6">
-            <div class="inline-flex items-center rounded-md border border-gold/40 bg-surface px-3 py-1 text-xs font-bold tracking-wider text-gold">
-              PENDING_EVIDENCE
-            </div>
-            <h3 class="mt-4 text-base font-semibold text-white">Aguardando Evidência ou Medição</h3>
-            <p class="mt-2 text-sm leading-relaxed text-gray-300">
-              Depende de retorno formal de fornecedor/HSM, inspeção pendente ou execução de medição (como
-              <code class="text-gold-bright">p95</code>/<code class="text-gold-bright">p99</code> e impacto de payload)
-              ainda não concluída.
-            </p>
-          </div>
-
-          <!-- HYPOTHESIS -->
-          <div class="card-panel p-6">
-            <div class="inline-flex items-center rounded-md border border-line bg-surface px-3 py-1 text-xs font-bold tracking-wider text-gray-200">
-              HYPOTHESIS
-            </div>
-            <h3 class="mt-4 text-base font-semibold text-white">Premissa de Modelagem</h3>
-            <p class="mt-2 text-sm leading-relaxed text-gray-300">
-              Premissa inicial de modelagem ou referência de trabalho adotada até que haja evidência direta que a
-              confirme ou ajuste.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diagnostic Flow Section -->
-    <section id="fluxo" class="border-b border-line bg-obsidian py-16 sm:py-20">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Como Conduzimos o Diagnóstico</p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Três etapas objetivas do levantamento inicial ao plano híbrido.
-          </h2>
-        </div>
-
-        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <!-- Step 01 -->
-          <div class="card-panel p-6">
-            <span class="text-sm font-bold tracking-widest text-gold-bright">PASSO 01</span>
-            <h3 class="mt-3 text-lg font-semibold text-white">01 Discovery &amp; CBOM</h3>
-            <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-              Levantamento inicial por camada (<span class="text-white">Credentials</span>,
-              <span class="text-white">Settlement</span>, <span class="text-white">Financial Transaction</span> e
-              <span class="text-white">Ledger</span>) para consolidar o inventário criptográfico (CBOM) e identificar
-              lacunas de informação.
-            </p>
-          </div>
-
-          <!-- Step 02 -->
-          <div class="card-panel p-6">
-            <span class="text-sm font-bold tracking-widest text-gold-bright">PASSO 02</span>
-            <h3 class="mt-3 text-lg font-semibold text-white">02 Evidence Classification</h3>
-            <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-              Aplicação rigorosa de <code class="text-gold-bright">VERIFIED</code>,
-              <code class="text-gold-bright">PENDING_EVIDENCE</code> e <code class="text-gold-bright">HYPOTHESIS</code>,
-              registrando o que está comprovado e o que exige validação adicional.
-            </p>
-          </div>
-
-          <!-- Step 03 -->
-          <div class="card-panel p-6">
-            <span class="text-sm font-bold tracking-widest text-gold-bright">PASSO 03</span>
-            <h3 class="mt-3 text-lg font-semibold text-white">03 Hybrid Plan &amp; Milestones</h3>
-            <p class="mt-2.5 text-sm leading-relaxed text-gray-300">
-              Definição de diretrizes de transição híbrida, critérios de medição em homologação e marcos de
-              governança alinhados a <strong class="text-white">NIST IR 8547 (Oct 2026)</strong>,
-              <strong class="text-white">FIPS 203 (ML-KEM)</strong> e <strong class="text-white">FIPS 204 (ML-DSA)</strong>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Closing CTA Section -->
-    <section class="bg-charcoal py-16 sm:py-20">
-      <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Qryptal • qryptal.com.br</p>
-        <h2 class="mt-3 text-2xl font-bold tracking-tight text-white sm:text-4xl">
-          Comece pelo que é verificável. Evolua com critério.
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base">
-          Estruture o diagnóstico pós-quântico da sua operação com inventário CBOM, separação clara entre
-          <code class="text-gold-bright">VERIFIED</code>, <code class="text-gold-bright">PENDING_EVIDENCE</code> e
-          <code class="text-gold-bright">HYPOTHESIS</code>, e foco no que é tecnicamente defensável perante segurança
-          e auditoria.
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Post-Quantum Cryptography · Governança e Evidência</span>
+        <h1>Diagnóstico criptográfico pós-quântico com rastreabilidade para operações financeiras.</h1>
+        <p class="hero-sub">
+          Estruturamos inventário criptográfico (CBOM), mapeamento por camada operacional e validação de prontidão PQC
+          alinhados a <strong>NIST IR 8547 (Oct 2026)</strong>, <strong>FIPS 203 (ML-KEM)</strong> e
+          <strong>FIPS 204 (ML-DSA)</strong> — separando fatos verificados de pendências e hipóteses.
         </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <button
-            type="button"
-            data-open-diagnostic
-            class="btn-gold w-full px-7 py-3 text-sm sm:w-auto"
-          >
-            Solicitar diagnóstico técnico
+
+        <div class="founder-line">
+          <strong>Escopo factual:</strong> diagnóstico, inventário e governança de evidências sem promessas de migração automática nem substituição de validação em homologação.
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-gold">Solicitar diagnóstico técnico</a>
+          <button type="button" class="btn btn-cyan-outline" id="openChecklistBtn">
+            Ver critério de evidências
           </button>
-          <a
-            href="#evidencias"
-            class="btn-secondary w-full px-7 py-3 text-sm sm:w-auto"
-          >
-            Revisar critérios de evidência
-          </a>
+        </div>
+
+        <div class="tech-tags" aria-label="Padrões e estados operacionais">
+          <span class="tag">NIST IR 8547 (Oct 2026)</span>
+          <span class="tag">FIPS 203 (ML-KEM)</span>
+          <span class="tag">FIPS 204 (ML-DSA)</span>
+          <span class="tag">CBOM</span>
+          <span class="tag">VERIFIED · PENDING_EVIDENCE · HYPOTHESIS</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="metrics-grid" aria-label="Pilares de rigor operacional">
+        <div class="metric-card">
+          <div class="metric-title">4 Camadas Operacionais</div>
+          <div class="metric-desc">Credentials, Settlement, Financial Transaction e Ledger avaliados por responsabilidade e risco.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">3 Estados de Evidência</div>
+          <div class="metric-desc">Distinção estrita entre VERIFIED, PENDING_EVIDENCE e HYPOTHESIS em cada item auditado.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Métricas com Contexto</div>
+          <div class="metric-desc">Referências como +298B e p95/p99 tratadas como medição contextual, nunca como constante universal.</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="block" id="escopo">
+      <div class="container">
+        <span class="section-index">01 · O Que Entregamos Hoje</span>
+        <h2 class="section-title">Clareza técnica antes de qualquer alteração em produção.</h2>
+        <p class="section-lead">
+          A Qryptal organiza o trabalho de prontidão PQC com foco em auditabilidade, rastreabilidade e limite claro do que
+          já está comprovado frente ao que ainda exige inspeção, retorno de fornecedor ou teste em ambiente alvo.
+        </p>
+
+        <div class="scope-grid">
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">01 / INVENTÁRIO</span>
+              <h3>CBOM e Dependências</h3>
+              <p>
+                Consolidação de ativos, algoritmos e dependências criptográficas para reduzir pontos cegos antes de definir
+                caminhos híbridos ou prioridades de atualização.
+              </p>
+            </div>
+            <div class="scope-focus">Foco: rastreabilidade e CBOM</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">02 / GOVERNANÇA</span>
+              <h3>Controle de Evidências</h3>
+              <p>
+                Cada afirmação recebe estado explícito — VERIFIED, PENDING_EVIDENCE ou HYPOTHESIS — impedindo que premissas
+                sejam tratadas como prontidão concluída.
+              </p>
+            </div>
+            <div class="scope-focus">Foco: rigor de auditoria</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="scope-num">03 / TRANSIÇÃO</span>
+              <h3>Critérios e Homologação</h3>
+              <p>
+                Diretrizes de transição híbrida, compatibilidade de HSM/KMS e verificação de payload/latência (p95/p99)
+                com validação prática antes da produção.
+              </p>
+            </div>
+            <div class="scope-focus">Foco: execução controlada</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="camadas">
+      <div class="container">
+        <span class="section-index">02 · Taxonomia Operacional</span>
+        <h2 class="section-title">Arquitetura em 4 camadas para operações financeiras.</h2>
+        <p class="section-lead">
+          Cada camada concentra riscos, dependências de infraestrutura e critérios próprios para promoção de evidência.
+        </p>
+
+        <div class="layers-grid">
+          <article class="layer-card">
+            <div>
+              <span class="layer-code">CAMADA 01</span>
+              <h3>Credentials</h3>
+              <p>
+                Gestão de chaves, identidades, certificados, sessões e políticas de KMS/signers sob diretrizes de
+                rotação e governança de acesso.
+              </p>
+            </div>
+            <div class="layer-meta">Promoção para VERIFIED: configuração e inventário inspecionados</div>
+          </article>
+
+          <article class="layer-card">
+            <div>
+              <span class="layer-code">CAMADA 02</span>
+              <h3>Settlement</h3>
+              <p>
+                Liquidação financeira, confiança criptográfica e verificação de suporte efetivo de HSMs a esquemas como
+                ML-KEM e ML-DSA.
+              </p>
+            </div>
+            <div class="layer-meta">Promoção para VERIFIED: confirmação técnica/documental do hardware</div>
+          </article>
+
+          <article class="layer-card">
+            <div>
+              <span class="layer-code">CAMADA 03</span>
+              <h3>Financial Transaction</h3>
+              <p>
+                Integridade transacional e impacto de payload e latência (p95/p99), incluindo referências como +298B
+                avaliadas no contexto do protocolo e da rede.
+              </p>
+            </div>
+            <div class="layer-meta">Promoção para VERIFIED: medição registrada em teste/homologação</div>
+          </article>
+
+          <article class="layer-card">
+            <div>
+              <span class="layer-code">CAMADA 04</span>
+              <h3>Ledger</h3>
+              <p>
+                Trilha de auditoria, consistência de registros e retenção de longo prazo frente a horizontes de exposição
+                e requisitos regulatórios.
+              </p>
+            </div>
+            <div class="layer-meta">Promoção para VERIFIED: conferência de integridade e retenção</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="evidencias">
+      <div class="container">
+        <span class="section-index">03 · Disciplina de Evidências</span>
+        <h2 class="section-title">Separação estrita entre fato, pendência e hipótese.</h2>
+
+        <div class="scope-grid">
+          <article class="scope-card">
+            <div>
+              <span class="evidence-badge">VERIFIED</span>
+              <h3>Evidência Verificada</h3>
+              <p>
+                Respaldada por inspeção, conferência formal ou medição registrada dentro do escopo e do período
+                avaliados.
+              </p>
+            </div>
+            <div class="scope-focus">Base factual auditável</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="evidence-badge">PENDING_EVIDENCE</span>
+              <h3>Evidência Pendente</h3>
+              <p>
+                Aguarda retorno de fabricante/fornecedor de HSM, coleta de configuração ou execução de medição em
+                ambiente de teste.
+              </p>
+            </div>
+            <div class="scope-focus">Pendência explícita sem mascaramento</div>
+          </article>
+
+          <article class="scope-card">
+            <div>
+              <span class="evidence-badge">HYPOTHESIS</span>
+              <h3>Hipótese de Trabalho</h3>
+              <p>
+                Premissa inicial de modelagem ou cenário de referência adotado até que evidência direta confirme ou
+                corrija o ponto.
+              </p>
+            </div>
+            <div class="scope-focus">Sujeita a validação empírica</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contato">
+      <div class="container">
+        <div class="cta-box">
+          <span class="section-index">04 · Próximo Passo</span>
+          <h2>Comece pelo que é verificável. Evolua com critério.</h2>
+          <p>
+            Se a sua operação precisa estruturar inventário CBOM, critérios de prontidão PQC por camada e trilha de
+            evidências sem ruído comercial, inicie uma conversa técnica com a Qryptal.
+          </p>
+
+          <div class="cta-actions">
+            <a href="mailto:contato@qryptal.com.br?subject=Diagn%C3%B3stico%20PQC%20%E2%80%94%20Qryptal" class="btn btn-gold">
+              Iniciar conversa técnica
+            </a>
+            <div class="email-pill">
+              <span id="contactEmail">contato@qryptal.com.br</span>
+              <button type="button" class="copy-btn" id="copyEmailBtn">Copiar</button>
+            </div>
+          </div>
+
+          <p class="cta-note">
+            Observação de governança: evidências possuem contexto e validade; alterações de firmware, KMS ou parâmetros de
+            rede exigem nova verificação para manter o status VERIFIED.
+          </p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Minimal Footer -->
-  <footer class="border-t border-line bg-obsidian py-8">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-xs text-gray-400 sm:flex-row sm:px-6 lg:px-8">
-      <div>
-        <span class="font-semibold tracking-[0.18em] text-white">QRYPTAL</span>
-        <span class="mx-2 text-line">|</span>
-        <span>qryptal.com.br</span>
-      </div>
-      <div>
-        NIST IR 8547 (Oct 2026) · FIPS 203 (ML-KEM) · FIPS 204 (ML-DSA)
-      </div>
+  <footer>
+    <div class="container footer-inner">
+      <span>Qryptal · Diagnóstico Criptográfico Pós-Quântico (qryptal.com.br)</span>
+      <span>Alinhado a NIST IR 8547 (Oct 2026) · FIPS 203 · FIPS 204</span>
     </div>
   </footer>
 
-  <!-- Diagnostic Request Modal (Client-side only, zero backend clutter) -->
-  <div
-    id="diagnostic-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="diagnostic-modal-title"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 backdrop-blur-xs"
-  >
-    <div class="w-full max-w-lg rounded-xl border border-gold/40 bg-charcoal p-6 shadow-2xl">
-      <div class="flex items-start justify-between gap-4 border-b border-line pb-4">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-wider text-gold">Qryptal • Diagnóstico PQC</p>
-          <h3 id="diagnostic-modal-title" class="mt-1 text-lg font-bold text-white">
-            Solicitar diagnóstico técnico
-          </h3>
-        </div>
-        <button
-          type="button"
-          id="close-diagnostic-modal"
-          aria-label="Fechar janela de solicitação"
-          class="rounded-lg border border-line bg-surface px-2.5 py-1 text-sm text-gray-300 transition hover:border-gold hover:text-gold-bright"
-        >
-          ✕
-        </button>
+  <div class="modal-backdrop" id="checklistModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Critério de Evidências na Qryptal</h3>
+        <button type="button" class="modal-close" id="closeChecklistBtn" aria-label="Fechar janela">ESC</button>
       </div>
-
-      <form id="diagnostic-form" class="mt-5 space-y-4">
-        <div>
-          <label for="org-name" class="block text-xs font-medium text-gray-200">
-            Instituição / Organização
-          </label>
-          <input
-            id="org-name"
-            name="orgName"
-            type="text"
-            required
-            placeholder="Ex.: Operação Bancária / Liquidação"
-            class="mt-1.5 w-full rounded-lg border border-line bg-obsidian px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:border-gold focus:outline-none"
-          />
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <label for="contact-role" class="block text-xs font-medium text-gray-200">
-              Papel / Área
-            </label>
-            <select
-              id="contact-role"
-              name="role"
-              class="mt-1.5 w-full rounded-lg border border-line bg-obsidian px-3 py-2.5 text-sm text-white focus:border-gold focus:outline-none"
-            >
-              <option value="CISO / Segurança">CISO / Segurança</option>
-              <option value="Arquitetura / Plataforma">Arquitetura / Plataforma</option>
-              <option value="Criptografia / HSM-KMS">Criptografia / HSM-KMS</option>
-              <option value="Auditoria / Governança">Auditoria / Governança</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="primary-layer" class="block text-xs font-medium text-gray-200">
-              Camada Prioritária
-            </label>
-            <select
-              id="primary-layer"
-              name="layer"
-              class="mt-1.5 w-full rounded-lg border border-line bg-obsidian px-3 py-2.5 text-sm text-white focus:border-gold focus:outline-none"
-            >
-              <option value="Credentials">Credentials</option>
-              <option value="Settlement">Settlement</option>
-              <option value="Financial Transaction">Financial Transaction</option>
-              <option value="Ledger">Ledger</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label for="evidence-notes" class="block text-xs font-medium text-gray-200">
-            Contexto atual (evidências, HSM/KMS ou medições p95/p99)
-          </label>
-          <textarea
-            id="evidence-notes"
-            name="notes"
-            rows="3"
-            placeholder="Descreva brevemente o que já é VERIFIED, o que está em PENDING_EVIDENCE ou HYPOTHESIS no seu escopo."
-            class="mt-1.5 w-full rounded-lg border border-line bg-obsidian px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:border-gold focus:outline-none"
-          ></textarea>
-        </div>
-
-        <div id="diagnostic-feedback" class="hidden rounded-lg border border-gold/50 bg-surface p-3.5 text-xs text-gray-200"></div>
-
-        <div class="flex flex-col-reverse gap-2.5 pt-2 sm:flex-row sm:justify-end">
-          <button
-            type="button"
-            id="cancel-diagnostic-modal"
-            class="btn-secondary px-4 py-2.5 text-xs sm:text-sm"
-          >
-            Fechar
-          </button>
-          <button
-            type="submit"
-            class="btn-gold px-5 py-2.5 text-xs sm:text-sm"
-          >
-            Registrar pauta de diagnóstico
-          </button>
-        </div>
-      </form>
+      <p>Como classificamos cada item antes de consolidar o diagnóstico:</p>
+      <ul class="checklist">
+        <li><span>[VERIFIED]</span> Comprovado por inspeção direta, registro conferido ou medição formal.</li>
+        <li><span>[PENDING_EVIDENCE]</span> Dependente de retorno de fornecedor/HSM ou execução de teste.</li>
+        <li><span>[HYPOTHESIS]</span> Premissa inicial de análise até comprovação em escopo real.</li>
+      </ul>
+      <button type="button" class="btn btn-gold btn-sm" id="closeChecklistBottomBtn">Entendido</button>
     </div>
   </div>
 
-  <!-- Client-side modal interaction and local briefing summary handler -->
   <script>
     (function () {
-      const modal = document.getElementById("diagnostic-modal");
-      const openButtons = document.querySelectorAll("[data-open-diagnostic]");
-      const closeBtn = document.getElementById("close-diagnostic-modal");
-      const cancelBtn = document.getElementById("cancel-diagnostic-modal");
-      const form = document.getElementById("diagnostic-form");
-      const feedback = document.getElementById("diagnostic-feedback");
-
-      if (!modal || !form || !feedback) {
-        return;
-      }
+      const modal = document.getElementById("checklistModal");
+      const openBtn = document.getElementById("openChecklistBtn");
+      const closeBtn = document.getElementById("closeChecklistBtn");
+      const closeBottomBtn = document.getElementById("closeChecklistBottomBtn");
+      const copyBtn = document.getElementById("copyEmailBtn");
+      const emailEl = document.getElementById("contactEmail");
 
       function openModal() {
-        feedback.classList.add("hidden");
-        feedback.textContent = "";
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-        const orgInput = document.getElementById("org-name");
-        if (orgInput) {
-          orgInput.focus();
-        }
+        modal.classList.add("active");
       }
 
       function closeModal() {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
+        modal.classList.remove("active");
       }
 
-      openButtons.forEach((btn) => {
-        btn.addEventListener("click", openModal);
-      });
+      if (openBtn) openBtn.addEventListener("click", openModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+      if (closeBottomBtn) closeBottomBtn.addEventListener("click", closeModal);
 
-      if (closeBtn) {
-        closeBtn.addEventListener("click", closeModal);
+      if (modal) {
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) closeModal();
+        });
       }
 
-      if (cancelBtn) {
-        cancelBtn.addEventListener("click", closeModal);
-      }
-
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && modal && modal.classList.contains("active")) {
           closeModal();
         }
       });
 
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-          closeModal();
-        }
-      });
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        try {
-          const orgName = (document.getElementById("org-name")?.value || "").trim();
-          const role = document.getElementById("contact-role")?.value || "CISO / Segurança";
-          const layer = document.getElementById("primary-layer")?.value || "Credentials";
-          const notes = (document.getElementById("evidence-notes")?.value || "").trim();
-
-          if (!orgName) {
-            feedback.textContent = "Informe a instituição ou organização para estruturar a pauta.";
-            feedback.classList.remove("hidden");
-            return;
+      if (copyBtn && emailEl) {
+        copyBtn.addEventListener("click", function () {
+          const text = emailEl.textContent.trim();
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+              const original = copyBtn.textContent;
+              copyBtn.textContent = "Copiado";
+              setTimeout(function () {
+                copyBtn.textContent = original;
+              }, 1600);
+            }).catch(function () {});
           }
-
-          feedback.innerHTML =
-            '<strong class="text-gold-bright">Pauta estruturada localmente:</strong> ' +
-            orgName +
-            " (" +
-            role +
-            ") — foco inicial em <strong>" +
-            layer +
-            "</strong> com classificação explícita entre <code>VERIFIED</code>, <code>PENDING_EVIDENCE</code> e <code>HYPOTHESIS</code>" +
-            (notes ? " e contexto registrado: \"" + notes.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "\"." : ".");
-          feedback.classList.remove("hidden");
-        } catch (err) {
-          feedback.textContent = "Não foi possível preparar o resumo local da pauta.";
-          feedback.classList.remove("hidden");
-        }
-      });
+        });
+      }
     })();
   </script>
 </body>
