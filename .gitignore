@@ -4,3 +4,13 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+
+# Python / ambiente local / artefatos temporários
+__pycache__/
+*.py[cod]
+qryptal_env/
+.venv/
+venv/
+test_payload.json
+*.tmp
+*.bak
