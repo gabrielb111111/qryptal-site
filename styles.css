@@ -4,6 +4,7 @@
   --bg-surface-elevated: #161D22;
   --border-subtle: #1F2933;
   --border-gold: rgba(197, 160, 89, 0.45);
+  --border-gold-strong: rgba(197, 160, 89, 0.72);
   --accent-cyan: #38BDF8;
   --accent-cyan-dim: rgba(56, 189, 248, 0.12);
   --accent-gold: #C5A059;
@@ -51,7 +52,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(9, 12, 14, 0.9);
+  background-color: rgba(9, 12, 14, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -109,7 +110,7 @@ header {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   border: 1px solid transparent;
 }
 
@@ -143,7 +144,7 @@ header {
 
 /* Hero Section */
 .hero {
-  padding: 80px 0 64px;
+  padding: 84px 0 68px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -175,12 +176,18 @@ header {
   margin-bottom: 28px;
 }
 
+.hero-sub strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 .founder-line {
   font-size: 0.95rem;
   color: var(--text-secondary);
   margin-bottom: 36px;
-  padding-left: 14px;
+  padding: 2px 0 2px 16px;
   border-left: 2px solid var(--accent-gold);
+  max-width: 720px;
 }
 
 .founder-line strong {
@@ -225,6 +232,11 @@ header {
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   padding: 20px 22px;
+  transition: border-color 0.2s ease;
+}
+
+.metric-card:hover {
+  border-color: var(--border-gold);
 }
 
 .metric-title {
@@ -238,6 +250,11 @@ header {
 .metric-desc {
   font-size: 0.88rem;
   color: var(--text-secondary);
+}
+
+.metric-desc strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 /* Content Sections */
@@ -296,12 +313,13 @@ section.block {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .scope-card:hover,
 .layer-card:hover {
-  border-color: var(--border-gold);
+  border-color: var(--border-gold-strong);
+  transform: translateY(-2px);
 }
 
 .scope-num,
@@ -328,6 +346,12 @@ section.block {
   font-size: 0.925rem;
   color: var(--text-secondary);
   margin-bottom: 22px;
+}
+
+.scope-card p strong,
+.layer-card p strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .scope-focus,
@@ -410,6 +434,7 @@ section.block {
   padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .copy-btn:hover {
@@ -494,6 +519,7 @@ footer a:hover {
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: 0.8rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .modal-close:hover {
@@ -567,12 +593,17 @@ footer a:hover {
   }
 
   .btn,
+  .metric-card,
   .scope-card,
-  .layer-card {
+  .layer-card,
+  .copy-btn,
+  .modal-close {
     transition: none;
   }
 
-  .btn-gold:hover {
+  .btn-gold:hover,
+  .scope-card:hover,
+  .layer-card:hover {
     transform: none;
   }
 }
